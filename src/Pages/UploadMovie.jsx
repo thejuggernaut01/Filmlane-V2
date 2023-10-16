@@ -73,7 +73,7 @@ const UploadMovie = () => {
       setPG("");
       setMovieDate("");
     } else {
-      navigate("/sign-in");
+      navigate("/auth");
     }
   };
 

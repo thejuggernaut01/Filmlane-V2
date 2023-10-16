@@ -16,7 +16,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate("/sign-in");
+      navigate("/auth");
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +90,7 @@ const Navbar = () => {
               Log out
             </button>
           ) : (
-            <Link to={"/sign-in"}>
+            <Link to={"/auth"}>
               <button className="btn btn-primary">Sign in</button>
             </Link>
           )}
@@ -186,7 +186,7 @@ const Navbar = () => {
           {currentUser ? (
             <button onClick={handleLogout}>Log out</button>
           ) : (
-            <Link to={"/sign-in"}>
+            <Link to={"/auth"}>
               <button onClick={toggleSideBar}>Sign in</button>
             </Link>
           )}

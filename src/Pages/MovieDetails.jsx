@@ -48,7 +48,7 @@ const MovieDetails = () => {
       }
     } else {
       setLoading(false);
-      navigate("/sign-in");
+      navigate("/auth");
     }
   };
 

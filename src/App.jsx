@@ -13,6 +13,9 @@ import ShowingMovies from "./Layout/ShowingMovies";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 
+// Hanko
+import HankoAuth from "./Layout/User/HankoAuth";
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -20,7 +23,8 @@ function App() {
       element: <RootRoute />,
       children: [
         { index: true, element: <Header /> },
-        { path: "sign-in", element: <Login /> },
+        { path: "auth", element: <HankoAuth /> },
+        // { path: "sign-in", element: <Login /> },
         { path: "sign-up", element: <SignUp /> },
         { path: "upload-movie", element: <UploadMovie /> },
 

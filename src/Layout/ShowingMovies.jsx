@@ -19,18 +19,18 @@ const ShowingMovies = () => {
 
   return (
     <>
-      <section class="upcoming" id="movies">
-        <div class="container">
-          <div class="flex-wrapper">
-            <div class="title-wrapper">
-              <p class="section-subtitle">In-Cinema Showings</p>
+      <section className="upcoming" id="movies">
+        <div className="container">
+          <div className="flex-wrapper">
+            <div className="title-wrapper">
+              <p className="section-subtitle">In-Cinema Showings</p>
 
-              <h2 class="h2 section-title">Showing Now</h2>
+              <h2 className="h2 section-title">Showing Now</h2>
             </div>
 
-            <ul class="filter-list">
+            <ul className="filter-list">
               <li>
-                <button class="filter-btn">Movies</button>
+                <button className="filter-btn">Movies</button>
               </li>
             </ul>
           </div>

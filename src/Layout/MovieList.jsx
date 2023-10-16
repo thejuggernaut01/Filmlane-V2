@@ -6,7 +6,7 @@ import { star, timeOutline } from "ionicons/icons";
 const MoviesList = ({ movies }) => {
   return (
     <>
-      <ul class="movies-list  has-scrollbar">
+      <ul className="movies-list  has-scrollbar">
         {movies &&
           movies.map(
             ({
@@ -19,8 +19,8 @@ const MoviesList = ({ movies }) => {
               movieId,
             }) => (
               <Link to={`/movies/${movieId}`} key={movieImage}>
-                <div class="movie-card">
-                  <figure class="card-banner">
+                <div className="movie-card">
+                  <figure className="card-banner">
                     <img
                       src={movieImage}
                       alt={`${movieTitle} poster`}
@@ -28,21 +28,21 @@ const MoviesList = ({ movies }) => {
                     />
                   </figure>
 
-                  <div class="title-wrapper">
-                    <h3 class="card-title">{movieTitle}</h3>
+                  <div className="title-wrapper">
+                    <h3 className="card-title">{movieTitle}</h3>
 
-                    <time datetime={year}>{year}</time>
+                    <time dateTime={year}>{year}</time>
                   </div>
 
-                  <div class="card-meta">
-                    <div class="badge badge-outline">{quality}</div>
+                  <div className="card-meta">
+                    <div className="badge badge-outline">{quality}</div>
 
-                    <div class="duration">
+                    <div className="duration">
                       <IonIcon icon={timeOutline}></IonIcon>
                       <time dateTime={`PT${duration}M`}>{duration} min</time>
                     </div>
 
-                    <div class="rating">
+                    <div className="rating">
                       <IonIcon icon={star}></IonIcon>
 
                       <data>{rating}</data>

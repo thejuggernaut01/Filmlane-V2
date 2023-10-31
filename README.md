@@ -39,13 +39,13 @@ To run this project locally, follow the instructions below.
 
 1. Clone this repository to your local machine:
 
-bash
+```bash```
 git clone https://github.com/thejuggernaut01/Filmlane-V2.git
 
-Navigate to the project directory:
+```Navigate to the project directory:```
 cd Filmlane-V2
 
-Install the project dependencies:
+```Install the project dependencies:```
 npm install
 
 ### Usage

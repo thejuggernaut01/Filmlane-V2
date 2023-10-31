@@ -78,9 +78,9 @@ export default function Checkout() {
 
         // Send Email
         const smtpConfig = {
-          Host: import.meta.env.REACT_APP_MAIL_HOST,
-          Username: import.meta.env.REACT_APP_MAIL_USERNAME,
-          Password: import.meta.env.REACT_APP_MAIL_PASSWORD,
+          Host: import.meta.env.VITE_MAIL_HOST,
+          Username: import.meta.env.VITE_MAIL_USERNAME,
+          Password: import.meta.env.VITE_MAIL_PASSWORD,
           To: `${billingEmail}`,
           From: "itunuoluwaadedayo17@gmail.com",
           Subject: "Confirmation: Your Movie Ticket Purchase",

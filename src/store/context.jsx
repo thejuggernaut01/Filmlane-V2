@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Hanko } from "@teamhanko/hanko-elements";
 
 export const Context = React.createContext();

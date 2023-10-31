@@ -57,10 +57,15 @@ Register or log in to your account to start purchasing movie tickets.
 
 ### Technologies Used
 React + Vite
-HTML, CSS, and JavaScript for the frontend
-Hanko for authentication
+
+HTML, CSS, TailwindCSS, and JavaScript for the frontend
+
+Hanko for authentication (to integrate hanko auth, visit -> https://www.hanko.io/) 
+
 Firebase for database and storage
+
 Paystack API for payment processing
+
 smtpjs for sending confirmation emails
 
 # React + Vite

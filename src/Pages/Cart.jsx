@@ -12,10 +12,13 @@ import {
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import classes from "./Cart.module.css";
-import { AuthContext } from "../store/AuthContext";
+
+import { Context } from "../store/context";
 
 const CartPage = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { email } = useContext(Context);
+  const userID = email && email.userID;
+
   const [carts, setCart] = useState([]);
   const inputRef = useRef();
 
@@ -54,10 +57,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const movieQuery = query(
-          cartRef,
-          where("user", "==", currentUser.email)
-        );
+        const movieQuery = query(cartRef, where("user", "==", userID));
         const querySnapshot = await getDocs(movieQuery);
 
         if (!querySnapshot.empty) {
@@ -73,18 +73,18 @@ const CartPage = () => {
     };
 
     fetchMovie();
-  }, [cartRef, currentUser.email]);
+  }, [cartRef, userID]);
 
   return (
-    <div className="container mx-auto py-10 text-white">
-      <h1 className="text-2xl font-bold mb-4">Cart</h1>
+    <div className="container py-10 mx-auto text-white">
+      <h1 className="mb-4 text-2xl font-bold">Cart</h1>
 
-      <div className="text-white mb-5">
+      <div className="mb-5 text-white">
         {carts.length > 0 ? (
           <div>
             <table className="w-[95%] mx-auto">
               <thead>
-                <tr className="flex justify-between border-b-white border-b-2">
+                <tr className="flex justify-between border-b-2 border-b-white">
                   <th className="py-2 pr-2 text-xl font-semibold">Product</th>
                   <th className="py-2 pr-2 text-xl font-semibold">Price</th>
                   <th className="py-2 pr-2 text-xl font-semibold">Quantity</th>
@@ -95,7 +95,7 @@ const CartPage = () => {
                 {carts.map((cartItem) => (
                   <tr
                     key={cartItem.movieTitle}
-                    className="flex justify-between border-b-white border-b-2"
+                    className="flex justify-between border-b-2 border-b-white"
                   >
                     <td className="py-2 text-lg w-[25%]">
                       {cartItem.movieTitle}
@@ -106,7 +106,7 @@ const CartPage = () => {
                     </td>
                     <td className="py-2 text-lg font-semibold ">
                       <input
-                        className="outline-white rounded-lg w-12 text-black pl-2"
+                        className="w-12 pl-2 text-black rounded-lg outline-white"
                         type="number"
                         name="qty"
                         defaultValue={cartItem.movieQty}

@@ -7,6 +7,7 @@ import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 import { AuthContext } from "../store/AuthContext";
 import AuthLoader from "../Layout/UI/AuthLoader";
+import { Context } from "../store/context";
 
 const UploadMovie = () => {
   const [movieTitle, setMovieTitle] = useState("");
@@ -22,14 +23,15 @@ const UploadMovie = () => {
   const [movieDate, setMovieDate] = useState("");
 
   const [load, setLoad] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  const { email } = useContext(Context);
+  const userID = email && email.userID;
 
   const moviesCollection = collection(db, "Movies");
   const navigate = useNavigate("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (currentUser) {
+    if (userID) {
       // Upload image to fire-storage
       try {
         setLoad(true);
@@ -79,15 +81,15 @@ const UploadMovie = () => {
 
   return (
     <>
-      <section className="text-white mt-2">
+      <section className="mt-2 text-white">
         <div className="xs:w-[85%] md:w-[75%] lg:w-[60%] mx-auto ">
-          <h2 className="text-center text-3xl font-bold">Upload Movie</h2>
-          {/* <hr className="text-yellow-200 my-2" /> */}
+          <h2 className="text-3xl font-bold text-center">Upload Movie</h2>
+          {/* <hr className="my-2 text-yellow-200" /> */}
 
           <form onSubmit={submitHandler} action="" className="mb-8 space-y-3">
             {/* Movie Titile */}
             <div className="space-y-2">
-              <label htmlFor="movieTitle" className="font-bold text-xl">
+              <label htmlFor="movieTitle" className="text-xl font-bold">
                 Movie Title <span className="inline-block text-red-700">*</span>
               </label>
               <input
@@ -104,7 +106,7 @@ const UploadMovie = () => {
 
             {/* Movie Description */}
             <div className="space-y-2">
-              <label htmlFor="movieDescription" className="font-bold text-xl">
+              <label htmlFor="movieDescription" className="text-xl font-bold">
                 Movie Description{" "}
                 <span className="inline-block text-red-700">*</span>
               </label>
@@ -141,9 +143,9 @@ const UploadMovie = () => {
             </div>
 
             {/* Cost, PG, DateTime */}
-            <div className="xs:space-y-2 md:space-y-0 md:flex justify-between px-3 gap-10 pb-1">
+            <div className="justify-between gap-10 px-3 pb-1 xs:space-y-2 md:space-y-0 md:flex">
               <div>
-                <label htmlFor="duration" className="font-bold text-xl">
+                <label htmlFor="duration" className="text-xl font-bold">
                   Cost <span className="inline-block text-red-700">*</span>
                 </label>
                 <input
@@ -157,7 +159,7 @@ const UploadMovie = () => {
               </div>
 
               <div>
-                <label htmlFor="quality" className="font-bold text-xl">
+                <label htmlFor="quality" className="text-xl font-bold">
                   PG <span className="inline-block text-red-700">*</span>
                 </label>
                 <select
@@ -165,7 +167,7 @@ const UploadMovie = () => {
                   value={pg}
                   onChange={(e) => setPG(e.target.value)}
                   id="PG"
-                  className="border border-solid border-white px-3 py-1 rounded-lg bg-white text-black outline-white"
+                  className="px-3 py-1 text-black bg-white border border-white border-solid rounded-lg outline-white"
                   required
                 >
                   <option className="text-black" value="13">
@@ -178,7 +180,7 @@ const UploadMovie = () => {
               </div>
 
               <div>
-                <label htmlFor="duration" className="font-bold text-xl">
+                <label htmlFor="duration" className="text-xl font-bold">
                   Date & Time{" "}
                   <span className="inline-block text-red-700">*</span>
                 </label>
@@ -194,9 +196,9 @@ const UploadMovie = () => {
             </div>
 
             {/* Duration, Quality, Year, Rating */}
-            <div className="xs:space-y-2 md:space-y-0 md:flex justify-between px-3 gap-10 pb-1">
+            <div className="justify-between gap-10 px-3 pb-1 xs:space-y-2 md:space-y-0 md:flex">
               <div>
-                <label htmlFor="duration" className="font-bold text-xl">
+                <label htmlFor="duration" className="text-xl font-bold">
                   Duration <span className="inline-block text-red-700">*</span>
                 </label>
                 <input
@@ -210,7 +212,7 @@ const UploadMovie = () => {
               </div>
 
               <div>
-                <label htmlFor="quality" className="font-bold text-xl">
+                <label htmlFor="quality" className="text-xl font-bold">
                   Quality <span className="inline-block text-red-700">*</span>
                 </label>
                 <select
@@ -218,7 +220,7 @@ const UploadMovie = () => {
                   value={quality}
                   onChange={(e) => setQuality(e.target.value)}
                   id="quality"
-                  className="border border-solid border-white px-3 py-1 rounded-lg bg-white text-black outline-white"
+                  className="px-3 py-1 text-black bg-white border border-white border-solid rounded-lg outline-white"
                   required
                 >
                   <option className="text-black" value="HD">
@@ -234,7 +236,7 @@ const UploadMovie = () => {
               </div>
 
               <div>
-                <label htmlFor="duration" className="font-bold text-xl">
+                <label htmlFor="duration" className="text-xl font-bold">
                   Year <span className="inline-block text-red-700">*</span>
                 </label>
                 <input
@@ -248,7 +250,7 @@ const UploadMovie = () => {
               </div>
 
               <div>
-                <label htmlFor="duration" className="font-bold text-xl">
+                <label htmlFor="duration" className="text-xl font-bold">
                   Rating <span className="inline-block text-red-700">*</span>
                 </label>
                 <input
@@ -262,8 +264,8 @@ const UploadMovie = () => {
               </div>
             </div>
 
-            <div className="space-y-2 px-3">
-              <label htmlFor="movieTitle" className="font-bold text-xl">
+            <div className="px-3 space-y-2">
+              <label htmlFor="movieTitle" className="text-xl font-bold">
                 Genre <span className="inline-block text-red-700">*</span>
               </label>
               <input
@@ -281,7 +283,7 @@ const UploadMovie = () => {
             <div className="text-center">
               <button
                 disabled=""
-                className="w-full border border-blue-900 rounded-lg py-3 px-4 bg-blue-900 text-white"
+                className="w-full px-4 py-3 text-white bg-blue-900 border border-blue-900 rounded-lg"
               >
                 {load ? <AuthLoader /> : "Upload"}
               </button>

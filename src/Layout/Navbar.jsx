@@ -3,10 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../store/AuthContext";
 import { IonIcon } from "@ionic/react";
 import { reorderTwo } from "ionicons/icons";
+import { Context } from "../store/context";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { currentUser, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+  const { email } = useContext(Context);
+  const userID = email && email.userID;
+
   const navigate = useNavigate();
 
   const toggleSideBar = () => {
@@ -77,7 +81,7 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {currentUser && currentUser.email === "dayoogini@gmail.com" && (
+          {userID === "620c4a62-6d75-4361-8732-91cb852c01c0" && (
             <li>
               <Link to={"/upload-movie"} class="navbar-link">
                 Upload Movie
@@ -85,7 +89,7 @@ const Navbar = () => {
             </li>
           )}
 
-          {currentUser ? (
+          {userID ? (
             <button onClick={handleLogout} className="btn btn-primary">
               Log out
             </button>
@@ -174,7 +178,7 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {currentUser && currentUser.email === "dayoogini@gmail.com" && (
+        {userID === "620c4a62-6d75-4361-8732-91cb852c01c0" && (
           <li className="p-3 border-b border-gray-600">
             <Link to={"/upload-movie"} onClick={toggleSideBar}>
               Upload Movie
@@ -183,7 +187,7 @@ const Navbar = () => {
         )}
 
         <li className="p-3 border-b border-gray-600">
-          {currentUser ? (
+          {userID ? (
             <button onClick={handleLogout}>Log out</button>
           ) : (
             <Link to={"/auth"}>

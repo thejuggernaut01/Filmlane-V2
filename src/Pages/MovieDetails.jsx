@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { AuthContext } from "../store/AuthContext";
 import AuthLoader from "../Layout/UI/AuthLoader";
 
 import { IonIcon } from "@ionic/react";
@@ -14,9 +13,12 @@ import {
   timeOutline,
   calendarNumberOutline,
 } from "ionicons/icons";
+import { Context } from "../store/context";
 
 const MovieDetails = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { email } = useContext(Context);
+  const userID = email && email.userID;
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [movieQty, setMovieQty] = useState(1);
@@ -27,7 +29,7 @@ const MovieDetails = () => {
   const cartCollection = collection(db, "cart");
 
   const buyTicket = async () => {
-    if (currentUser) {
+    if (userID) {
       setLoading(true);
       try {
         await addDoc(cartCollection, {
@@ -38,7 +40,7 @@ const MovieDetails = () => {
           pg: movie.pg,
           movieDuration: movie.duration,
 
-          user: currentUser.email,
+          user: userID,
         });
         setLoading(false);
         navigate("cart");
@@ -83,43 +85,43 @@ const MovieDetails = () => {
           <AuthLoader />
         </div>
       ) : (
-        <section class="movie-detail">
-          <div class="container">
-            <figure class="movie-detail-banner">
+        <section className="movie-detail">
+          <div className="container">
+            <figure className="movie-detail-banner">
               <img src={movie.movieImage} alt={`${movie.movieTitle}poster`} />
 
-              <button class="play-btn">
+              <button className="play-btn">
                 <IonIcon icon={playCircle}></IonIcon>
               </button>
             </figure>
 
-            <div class="movie-detail-content">
-              <h1 class="h1 detail-title">
+            <div className="movie-detail-content">
+              <h1 className="h1 detail-title">
                 <strong>{movie.movieTitle}</strong>
               </h1>
 
-              <div class="meta-wrapper">
-                <div class="badge-wrapper">
-                  <div class="badge badge-fill">PG {movie.PG}</div>
+              <div className="meta-wrapper">
+                <div className="badge-wrapper">
+                  <div className="badge badge-fill">PG {movie.PG}</div>
 
-                  <div class="badge badge-outline">{movie.quality}</div>
+                  <div className="badge badge-outline">{movie.quality}</div>
                 </div>
 
-                <div class="ganre-wrapper text-white">
+                <div className="text-white ganre-wrapper">
                   <p>{movie.genre}</p>
                 </div>
 
-                <div class="date-time">
+                <div className="date-time">
                   <div>
                     <IonIcon icon={calendarOutline}></IonIcon>
 
-                    <time datetime={movie.year}>{movie.year}</time>
+                    <time dateTime={movie.year}>{movie.year}</time>
                   </div>
 
                   <div>
                     <IonIcon icon={timeOutline}></IonIcon>
 
-                    <time datetime={`PT${movie.duration}M`}>
+                    <time dateTime={`PT${movie.duration}M`}>
                       {movie.duration} min
                     </time>
                   </div>
@@ -130,18 +132,18 @@ const MovieDetails = () => {
                 </div>
               </div>
 
-              <p class="storyline">{movie.movieDesc}</p>
+              <p className="storyline">{movie.movieDesc}</p>
 
               <div className="text-white">
-                <h3 className="text-2xl font-bold opacity-90 text-center">
+                <h3 className="text-2xl font-bold text-center opacity-90">
                   Ticket
                 </h3>
               </div>
 
-              <div className="px-4 text-white mb-5">
+              <div className="px-4 mb-5 text-white">
                 <table className="w-[90%] mx-auto">
                   <thead>
-                    <tr className="flex justify-between border-b-white border-b-2">
+                    <tr className="flex justify-between border-b-2 border-b-white">
                       <th className="text-xl font-semibold">Product</th>
                       <th className="py-2 text-xl font-semibold">Price</th>
                       <th className="py-2 text-xl font-semibold">Quantity</th>
@@ -160,7 +162,7 @@ const MovieDetails = () => {
                           value={movieQty}
                           onChange={(e) => setMovieQty(e.target.value)}
                           type="number"
-                          className="outline-white rounded-lg w-12 text-black pl-2"
+                          className="w-12 pl-2 text-black rounded-lg outline-white"
                         />
                       </td>
                     </tr>
@@ -168,14 +170,14 @@ const MovieDetails = () => {
                 </table>
               </div>
 
-              <div class="details-actions">
-                <div class="title-wrapper">
-                  <p class="title">Filmlane</p>
+              <div className="details-actions">
+                <div className="title-wrapper">
+                  <p className="title">Filmlane</p>
 
-                  <p class="text">Streaming Channels</p>
+                  <p className="text">Streaming Channels</p>
                 </div>
 
-                <button class="btn btn-primary" onClick={buyTicket}>
+                <button className="btn btn-primary" onClick={buyTicket}>
                   <IonIcon icon={ticketOutline}></IonIcon>
 
                   <span>{loading ? <AuthLoader /> : "Buy Ticket"}</span>

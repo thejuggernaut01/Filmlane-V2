@@ -57,7 +57,7 @@ export default function Checkout() {
     reference: new Date().getTime().toString(),
     email: billingEmail,
     amount: 100 * +(cartData.movieCost * cartData.movieQty), //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: process.env.REACT_APP_PAYSTACK_API_KEY,
+    publicKey: import.meta.env.REACT_APP_PAYSTACK_API_KEY,
   };
 
   const handlePaystackSuccessAction = async (reference) => {
@@ -78,9 +78,9 @@ export default function Checkout() {
 
         // Send Email
         const smtpConfig = {
-          Host: process.env.REACT_APP_MAIL_HOST,
-          Username: process.env.REACT_APP_MAIL_USERNAME,
-          Password: process.env.REACT_APP_MAIL_PASSWORD,
+          Host: import.meta.env.REACT_APP_MAIL_HOST,
+          Username: import.meta.env.REACT_APP_MAIL_USERNAME,
+          Password: import.meta.env.REACT_APP_MAIL_PASSWORD,
           To: `${billingEmail}`,
           From: "itunuoluwaadedayo17@gmail.com",
           Subject: "Confirmation: Your Movie Ticket Purchase",

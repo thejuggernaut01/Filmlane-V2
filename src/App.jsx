@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
+import { AuthProvider } from "./store/AuthContext";
+import { Provider } from "./store/context";
 import RootRoute from "./Pages/RootRoute";
 import Header from "./Layout/Header";
 import SignUp from "./Layout/User/SignUp";
@@ -8,13 +10,13 @@ import Login from "./Layout/User/Login";
 import UploadMovie from "./Pages/UploadMovie";
 import MovieRoute from "./Pages/MovieRoute";
 import MovieDetails from "./Pages/MovieDetails";
-import { AuthProvider } from "./store/AuthContext";
 import ShowingMovies from "./Layout/ShowingMovies";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 
 // Hanko
 import HankoAuth from "./Layout/User/HankoAuth";
+import HankoProfile from "./Layout/User/HankoProfile";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,7 +27,7 @@ function App() {
         { index: true, element: <Header /> },
         { path: "auth", element: <HankoAuth /> },
         // { path: "sign-in", element: <Login /> },
-        { path: "sign-up", element: <SignUp /> },
+        { path: "dashboard", element: <HankoProfile /> },
         { path: "upload-movie", element: <UploadMovie /> },
 
         {
@@ -45,7 +47,9 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <Provider>
+          <RouterProvider router={router} />
+        </Provider>
       </AuthProvider>
     </>
   );

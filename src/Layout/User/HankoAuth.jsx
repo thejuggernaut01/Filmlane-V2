@@ -9,7 +9,7 @@ export default function HankoAuth() {
   const hanko = useMemo(() => new Hanko(hankoApi), []);
 
   const redirectAfterLogin = useCallback(() => {
-    navigate("/");
+    navigate("/dashboard");
   }, [navigate]);
 
   useEffect(
@@ -17,6 +17,7 @@ export default function HankoAuth() {
       hanko.onAuthFlowCompleted(() => {
         redirectAfterLogin();
       }),
+
     [hanko, redirectAfterLogin]
   );
 
@@ -29,7 +30,7 @@ export default function HankoAuth() {
 
   return (
     <>
-      <div className="flex justify-center items-center h-[calc(100vh-76px)]">
+      <div className="flex justify-center items-center h-[calc(100vh-90px)]">
         <hanko-auth />
       </div>
     </>

@@ -12,6 +12,7 @@
   "dependencies": {
     "@ionic/react": "^7.5.0",
     "@teamhanko/hanko-elements": "^0.8.4",
+    "@teamhanko/hanko-frontend-sdk": "^0.9.0",
     "firebase": "^10.5.0",
     "ionicons": "^7.2.1",
     "react": "^18.2.0",

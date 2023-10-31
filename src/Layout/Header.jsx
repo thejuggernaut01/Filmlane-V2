@@ -1,11 +1,17 @@
+import { useContext } from "react";
+
 import { IonIcon } from "@ionic/react";
 import { calendarOutline, timeOutline, play } from "ionicons/icons";
 
 import Movies from "./Movies";
 import Services from "./Services";
 import Footer from "./Footer";
+import { Context } from "../store/context";
 
 const Header = () => {
+  const { data } = useContext(Context);
+  console.log(data);
+
   return (
     <>
       <section className="hero">

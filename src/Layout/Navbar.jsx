@@ -23,11 +23,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-around items-center py-4 text-white">
-      <div className="flex justify-around items-center">
+    <div className="flex items-center justify-around py-4 text-white">
+      <div className="flex items-center justify-around">
         <Link
           to={"/"}
-          className="text-white no-underline cursor-pointer text-2xl font-bold"
+          className="text-2xl font-bold text-white no-underline cursor-pointer"
         >
           {!openMenu && (
             <svg
@@ -58,7 +58,7 @@ const Navbar = () => {
           )}
         </Link>
 
-        <ul className="navbar-list hidden">
+        <ul className="hidden navbar-list lg:flex">
           <li>
             <Link to="/" class="navbar-link">
               Home
@@ -157,7 +157,7 @@ const Navbar = () => {
             </svg>
           </Link>
         </h1>
-        <li className="mt-20 p-3 border-b border-t border-gray-600">
+        <li className="p-3 mt-20 border-t border-b border-gray-600">
           <Link to="/" onClick={toggleSideBar}>
             Home
           </Link>
